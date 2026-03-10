@@ -1,0 +1,5 @@
+streamlit
+tensorflow
+google-generativeai
+Pillow
+protobuf

@@ -1,0 +1,6 @@
+.streamlit/secrets.toml
+detection guide test/
+full drawn images/
+משימות.txt
+__pycache__/
+*.pyc
