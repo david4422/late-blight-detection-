@@ -1,5 +1,5 @@
 streamlit
-tensorflow-cpu
+tensorflow
 google-generativeai
 Pillow
 protobuf>=6.31.1
