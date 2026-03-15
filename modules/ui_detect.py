@@ -155,6 +155,8 @@ def render_detect_tab():
                                 st.markdown(f'<span style="color:{color}; font-weight:bold;">{sev} ({conf:.0%})</span>', unsafe_allow_html=True)
                                 if r.get("sporulation") == "Yes":
                                     st.caption("🔬 Sporulation")
+                                if r.get("reasoning"):
+                                    st.caption(f"💬 {r.get('reasoning')}")
                             st.caption(f"#{idx + 1} ({r['col']},{r['row']})")
 
     else:
