@@ -1,8 +1,8 @@
-# Late Blight Detection Guide — Patch Analysis
+# Late Blight Detection Guide Patch Analysis
 
-> **Purpose**: Reusable guide for any AI model to detect and classify late blight severity in 200×150 pixel drone image patches.
+> **Purpose**: Reusable guide for any AI model to detect and classify late blight severity in 200X150 pixel drone image patches.
 > **Trained on**: 1,170 confirmed disease patches from validated agricultural database.
-> **Methodology**: "Late Blight Master Classifier" — classify by SPREAD, not by color.
+> **Methodology**: "Late Blight Master Classifier" classify by SPREAD, not by color.
 >
 > **Visual Reference**: [Detection Guide Test Report (with real images & coordinates)](http://localhost:3200/knowledge-base/detection_guide_test_report.html)
 
@@ -42,7 +42,7 @@ Late blight (*Phytophthora infestans*) is a devastating plant disease affecting 
 
 ---
 
-## Step 1: Detection — Is There Disease?
+## Step 1: Detection: Is There Disease?
 
 **Look for**: Necrotic (black/brown) tissue with a water-soaked appearance on leaf surfaces.
 
@@ -55,7 +55,7 @@ Late blight (*Phytophthora infestans*) is a devastating plant disease affecting 
 - **Key**: If there is NO necrotic tissue and NO water-soaked appearance → Clean
 - When scanning a full field image, 99%+ of patches will be Clean
 
-### Ground vs. Brown Leaves — Don't Confuse Them
+### Ground vs. Brown Leaves  Don't Confuse Them
 Many patches will contain **soil, mud, or bare ground** which is brown/gray. This is NOT disease.
 - **Ground/soil**: Uniform texture, no leaf veins, no water-soaked edges. Looks like dirt. → **Clean**
 - **Brown leaves (disease)**: Has leaf structure (veins, edges, shape), water-soaked or collapsed tissue, sits ON or AMONG green foliage. → **Disease**
@@ -70,7 +70,7 @@ Many patches will contain **soil, mud, or bare ground** which is brown/gray. Thi
 
 ---
 
-## Step 2: Classification — How Bad Is It?
+## Step 2: Classification: How Bad Is It?
 
 **CRITICAL RULE: Classify by SPREAD (area affected), NOT by color intensity.**
 A small dark spot = Early. A large pale area = Mid. Darkness tells you nothing about severity.
@@ -78,21 +78,21 @@ A small dark spot = Early. A large pale area = Mid. Darkness tells you nothing a
 ### Early Stage (59% of patches)
 | Feature | Description |
 |---------|-------------|
-| **Pattern** | Isolated, distinct necrotic spots — separate, NOT merging |
+| **Pattern** | Isolated, distinct necrotic spots separate, NOT merging |
 | **Scope** | Less than 15% of leaf surface affected |
 | **Systemic impact** | None. No stem/petiole involvement. Surrounding tissue healthy/green |
 | **Spots** | 1-3 separate spots, each clearly distinct |
-| **Color variants** | Gray-brown, yellow-brown, purple-brown, reddish-brown — all valid |
+| **Color variants** | Gray-brown, yellow-brown, purple-brown, reddish-brown all valid |
 | **Confidence range** | 0.3 (barely visible) to 0.9 (textbook isolated spot) |
 
-**Subtle Early patches**: Some are barely visible — pale discoloration, less than 5% affected, confidence as low as 0.3. These cluster in certain image sources. Trust the database — disease is confirmed even when near-invisible.
+**Subtle Early patches**: Some are barely visible pale discoloration, less than 5% affected, confidence as low as 0.3. These cluster in certain image sources. Trust the database disease is confirmed even when near-invisible.
 
-**Early + sporulation**: ~15% of Early patches show sporulation (white fuzz on a small isolated lesion). This is normal — sporulation alone does NOT upgrade to Mid. Always check spread first.
+**Early + sporulation**: ~15% of Early patches show sporulation (white fuzz on a small isolated lesion). This is normal sporulation alone does NOT upgrade to Mid. Always check spread first.
 
 ### Mid Stage (36% of patches)
 | Feature | Description |
 |---------|-------------|
-| **Pattern** | Coalescence — multiple spots MERGING together |
+| **Pattern** | Coalescence multiple spots MERGING together |
 | **Scope** | 15-50% of leaf surface affected |
 | **Systemic impact** | Progression toward leaf veins or petioles |
 | **Sporulation** | White fuzzy growth is a strong Mid indicator (~35% of Mid patches show it) |
@@ -113,7 +113,7 @@ A small dark spot = Early. A large pale area = Mid. Darkness tells you nothing a
 ### Late Stage (5% of patches)
 | Feature | Description |
 |---------|-------------|
-| **Pattern** | Extensive, uncontrolled necrosis — overwhelming damage |
+| **Pattern** | Extensive, uncontrolled necrosis  overwhelming damage |
 | **Scope** | More than 50% of leaf area affected, OR total structural collapse |
 | **Systemic impact** | Blackened stems, dying/dead leaves, multi-leaf involvement |
 | **Healthy tissue** | Little to none remaining |
@@ -127,7 +127,7 @@ A small dark spot = Early. A large pale area = Mid. Darkness tells you nothing a
 
 **Late + sporulation**: Unusual but confirmed (~3% of Late patches). Indicates transitional phase where severe damage coexists with active spore production.
 
-**Late clusters unpredictably**: Late patches cluster in specific image source groups, not evenly distributed. Some batches have zero Late, others have 10%. Extreme example: image_id 8782293 had 50% Late rate (3 of 6 patches) — some sources capture severely diseased areas.
+**Late clusters unpredictably**: Late patches cluster in specific image source groups, not evenly distributed. Some batches have zero Late, others have 10%. Extreme example: image_id 8782293 had 50% Late rate (3 of 6 patches) some sources capture severely diseased areas.
 
 ---
 
@@ -171,17 +171,17 @@ Is it unmistakable / textbook?
 
 ## Common Mistakes to Avoid
 
-### 1. Color Darkness ≠ Severity
-A small, very dark spot is Early. A large, pale gray area is Mid. NEVER upgrade a classification because the color is intense — only upgrade based on SPREAD.
+### 1. Color Darkness != Severity
+A small, very dark spot is Early. A large, pale gray area is Mid. NEVER upgrade a classification because the color is intense only upgrade based on SPREAD.
 
-### 2. Sporulation ≠ Mid
+### 2. Sporulation != Mid
 White fuzzy growth appears on 15% of Early patches. Always check the affected area percentage BEFORE considering sporulation. Sporulation is a supporting indicator, not a primary classifier.
 
 ### 3. Stem vs. Leaf Assessment
 Some patches show stems more prominently than leaves. Stem necrosis (blackened, shriveled) indicates systemic spread:
 - Blackened stem alone → Late (0.9)
 - Stem discoloration without shriveling → Mid consideration
-- Stem is naturally darker — don't confuse healthy dark stems with disease
+- Stem is naturally darker don't confuse healthy dark stems with disease
 
 ### 4. Same Source = Different Severity
 Multiple patches from the same image can span Early/Mid/Late. Don't assume consistency — classify each patch independently. The largest cluster observed: 9 findings from one image (image_id 4267804) spanning Early and Mid.
