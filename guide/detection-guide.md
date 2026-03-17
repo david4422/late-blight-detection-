@@ -1,6 +1,6 @@
 # Late Blight Detection Guide Patch Analysis
 
-> **Purpose**: Reusable guide for any AI model to detect and classify late blight severity in 200X150 pixel drone image patches.
+> **Purpose**: Reusable guide for any AI model to detect and classify late blight severity in 224X224 pixel drone image patches.
 > **Trained on**: 1,170 confirmed disease patches from validated agricultural database.
 > **Methodology**: "Late Blight Master Classifier" classify by SPREAD, not by color.
 >
@@ -264,18 +264,18 @@ For every patch analyzed, provide:
 
 ## Full Image Scanning — ALWAYS Slice First
 
-**CRITICAL: NEVER try to analyze a full image directly. ALWAYS slice into 200×150 patches first.**
+**CRITICAL: NEVER try to analyze a full image directly. ALWAYS slice into 224×224 patches first.**
 
-This guide was trained on **200×150 pixel patches**. That is the only resolution it works at. Any image of any size MUST be sliced into 200×150 patches before classification. Do not skip this step. Do not try to eyeball the full image — disease spots are tiny and invisible at full zoom.
+This guide was trained on **224×224 pixel patches**. That is the only resolution it works at. Any image of any size MUST be sliced into 224×224 patches before classification. Do not skip this step. Do not try to eyeball the full image — disease spots are tiny and invisible at full zoom.
 
 ### Slice Protocol (Mandatory)
 1. Take the input image (any size: W × H pixels)
-2. **Slice** into a grid of **200×150 patches** — this is non-negotiable
-3. Start from top-left (0, 0), move right by 200px, down by 150px
+2. **Slice** into a grid of **224×224 patches** — this is non-negotiable
+3. Start from top-left (0, 0), move right by 224px, down by 224px
 4. Edge handling: last column/row overlaps to cover all pixels
-5. Grid size: `ceil(W/200) × ceil(H/150)` patches
+5. Grid size: `ceil(W/224) × ceil(H/224)` patches
 6. **Classify EACH patch individually** using Steps 1-2 of this guide
-7. Each patch is analyzed at 200×150 — the resolution this guide was trained on
+7. Each patch is analyzed at 224×224 — the resolution this guide was trained on
 8. Do NOT analyze patches at any other resolution
 
 ### Required Output: Severity Map
@@ -306,15 +306,15 @@ After classifying all patches, **always produce a severity map**. This is a requ
 
 ## How to Use This Guide
 
-### For a single patch (200×150):
+### For a single patch (224×224):
 1. **Detect**: Is there late blight? If no symptoms → Clean
 2. **Classify**: Based on SPREAD and SYSTEMIC IMPACT (not color darkness)
 3. **Score confidence**: Using the rubric above
 4. **Output**: Classification, Confidence, Rationale, Sporulation
 
 ### For a full field image (any size):
-1. **Slice** into 200×150 patches — ALWAYS, no exceptions
-2. **Classify** each patch individually at 200×150 resolution
+1. **Slice** into 224×224 patches — ALWAYS, no exceptions
+2. **Classify** each patch individually at 224×224 resolution
 3. **Build severity map** — color-coded grid (Green/Yellow/Orange/Red)
 4. **Report** all disease locations with grid + pixel coordinates
 5. **Output**: Severity map + disease patch list + summary statistics

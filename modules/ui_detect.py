@@ -13,7 +13,7 @@ def render_detect_tab():
 
     st.sidebar.markdown("---")
     st.sidebar.markdown("**ML Model**: 224×224 patches → Sick/Healthy")
-    st.sidebar.markdown("**AI + Guide**: 200×150 patches → Early/Mid/Late")
+    st.sidebar.markdown("**AI + Guide**: 224×224 patches → Early/Mid/Late")
 
     # ---- Upload ----
     uploaded = st.file_uploader(
@@ -31,12 +31,11 @@ def render_detect_tab():
             st.image(image, caption=f"Uploaded: {w} × {h} pixels", use_column_width=True)
 
         # Patch size depends on method
+        patch_w, patch_h = 224, 224
         if use_model:
-            patch_w, patch_h = 224, 224
             st.info(f"🤖 ML Model selected — slicing into **224×224** patches")
         elif use_guide:
-            patch_w, patch_h = 200, 150
-            st.info(f"🧠 AI + Guide selected — slicing into **200×150** patches")
+            st.info(f"🧠 AI + Guide selected — slicing into **224×224** patches")
         else:
             st.warning("Select a detection method in the sidebar")
             st.stop()
@@ -172,7 +171,7 @@ def render_detect_tab():
             if use_model:
                 st.markdown("Auto-cut into 224×224 patches")
             elif use_guide:
-                st.markdown("Auto-cut into 200×150 patches")
+                st.markdown("Auto-cut into 224×224 patches")
             else:
                 st.markdown("Select a method in the sidebar")
         with col3:

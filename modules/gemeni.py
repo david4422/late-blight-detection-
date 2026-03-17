@@ -19,7 +19,7 @@ def classify_batch_with_ai(patch_list):
       # Build grid image (5 columns)
       cols_per_row = 5
       rows_needed = -(-len(patch_list) // cols_per_row)
-      pw, ph = 200, 150
+      pw, ph = 224, 224
       grid = Image.new("RGB", (cols_per_row * pw, rows_needed * ph), (0, 0, 0))
 
       for i, p in enumerate(patch_list):
@@ -35,7 +35,6 @@ def classify_batch_with_ai(patch_list):
       prompt = f"""You are a plant disease expert. Use this detection guide:
 
   {detection_guide}
-
   I'm sending you a grid image of {len(patch_list)} drone image patches arranged in {cols_per_row} columns.
   Patches are numbered left-to-right, top-to-bottom starting from 1.
 
