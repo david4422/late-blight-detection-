@@ -2,7 +2,8 @@ import streamlit as st
 from PIL import Image
 from modules.slicing import slice_image
 from modules.detection import run_detection
-
+import csv
+import io
 
 def render_detect_tab():
     """Render the detection tab UI."""
@@ -155,8 +156,31 @@ def render_detect_tab():
                                 if r.get("sporulation") == "Yes":
                                     st.caption("🔬 Sporulation")
                                 if r.get("reasoning"):
-                                    st.caption(f"💬 {r.get('reasoning')}")
+                                    st.caption(f"💬 {r.get('reasoning')}" )
                             st.caption(f"#{idx + 1} ({r['col']},{r['row']})")
+                # Download CSV button
+                csv_buffer = io.StringIO()
+                writer = csv.writer(csv_buffer)
+
+                if mode == "model":
+                    writer.writerow(["image_name", "patch_id", "col", "row", "x", "y", "label", "confidence"])
+                    for i, r in enumerate(results):
+                        writer.writerow([uploaded.name, i+1, r["col"], r["row"], r["x"], r["y"], r["label"], f'{r["confidence"]:.4f}'])
+                elif mode == "guide":
+                    writer.writerow(["image_name", "patch_id", "col", "row", "x", "y", "severity", "confidence", "sporulation", "reasoning"])
+                    for i, r in enumerate(results):
+                        writer.writerow([uploaded.name, i+1, r["col"], r["row"], r["x"], r["y"], r.get("severity",""), f'{r.get("confidence",0):.4f}',r.get("sporulation",""), r.get("reasoning","")])
+                else:  # combo
+                    writer.writerow(["image_name", "patch_id", "col", "row", "x", "y", "ml_label", "ml_confidence", "severity", "confidence", "sporulation", "reasoning"])
+                    for i, r in enumerate(results):
+                        writer.writerow([uploaded.name, i+1, r["col"], r["row"], r["x"], r["y"], r.get("label",""), f'{r.get("confidence",0):.4f}', r.get("severity",""), f'{r.get("confidence",0):.4f}', r.get("sporulation",""), r.get("reasoning","")])
+
+                st.download_button(
+                    label="📥 Download Results CSV",
+                    data=csv_buffer.getvalue(),
+                    file_name=f"{uploaded.name.rsplit('.', 1)[0]}_{mode}_results.csv",
+                    mime="text/csv"
+                )
 
     else:
         # Empty state
