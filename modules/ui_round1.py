@@ -50,12 +50,12 @@ def render_round1_tab():
             st.markdown(f.read())
 
     with sub2:
-        with open(f"{SUMMARY_DIR}/image-analysis-summary.md ", "r", encoding="utf-8") as f:
+        with open(f"{SUMMARY_DIR}/image-analysis-summary.md", "r", encoding="utf-8") as f:
             md = f.read()
         render_markdown_with_images(md, SUMMARY_DIR)
 
     with sub3:
-        with open(f"{SUMMARY_DIR}/method-comparison-summary.md ", "r", encoding="utf-8") as f:
+        with open(f"{SUMMARY_DIR}/method-comparison-summary.md", "r", encoding="utf-8") as f:
             md = f.read()
         render_markdown_with_images(md, SUMMARY_DIR)
 
