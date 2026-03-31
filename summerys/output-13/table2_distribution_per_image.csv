@@ -1,0 +1,16 @@
+image_name,Patches,ML_%_Sick,Guide_%_Diseased,Combo_%_Diseased
+01_field4945_mar14_healthy_flowers_redbrown_soil.JPG,432,35.9,5.6,0.2
+02_field4945_mar19_healthy_soil_rows_visible.JPG,432,50.9,25.5,10.9
+03_field4945_mar28_stressed_yellowing_wilting.JPG,432,62.5,80.3,57.6
+04_field4956_apr08_stressed_sparse_irrigation.JPG,432,45.4,36.6,20.6
+05_field5256_mar18_healthy_neat_rows_dark_soil.JPG,432,37.5,1.2,4.6
+06_field5256_apr07_healthy_dense_some_browning.JPG,432,41.4,40.3,32.2
+07_field5256_apr07_young_plants_early_growth.JPG,432,13.2,17.1,2.1
+08_field5256_jun07_healthy_full_canopy_flowers.JPG,432,53.2,6.7,16.7
+09_field5256_jan03_healthy_mixed_yellowing.jpg,432,47.9,44.0,30.3
+10_field6116_jun25_sick_water_channel_brown_leaves.JPG,432,26.2,2.5,0.7
+11_unknown_sick_brown_dead_patches.jpg,1,100.0,0.0,0.0
+12_field_apr24_healthy_dense_green_sandy_soil.JPG,432,31.2,20.4,13.7
+13_field_apr24_healthy_dense_gray_soil.JPG,432,47.9,58.3,31.5
+16_closeup_sick_late_brown_dead_tissue.jpg,1,100.0,100.0,100.0
+17_closeup_sick_late_dark_lesions.jpg,1,0.0,100.0,0.0

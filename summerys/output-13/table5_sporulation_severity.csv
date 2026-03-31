@@ -1,0 +1,5 @@
+,Total_Patches,Sporulation_Yes,Sporulation_No,Sporulation_Undetermined,Sporulation_%,Avg_Confidence
+Clean,3683,0,3682,1,0.0,0.899
+Early,982,1,981,0,0.1,0.615
+Mid,321,11,310,0,3.4,0.828
+Late,161,1,160,0,0.6,0.919

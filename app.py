@@ -11,8 +11,9 @@ st.set_page_config(
     layout="wide",
 )
 
-from modules.ui_detect import render_detect_tab
+from modules.ui_detect import render_detect_round1_tab
 from modules.ui_gallery import render_gallery_tab
+from modules.ui_round1 import render_round1_tab
 
 # ---- Session State ----
 if "patches" not in st.session_state:
@@ -27,16 +28,24 @@ st.title("🌿 Late Blight Detector")
 st.markdown("Upload a drone photo → slice into patches → detect disease")
 
 # ---- Tabs ----
-tab_detect, tab_guide, tab_gallery = st.tabs(["🔍 Detection", "📖 Guide", "🖼️ Gallery"])
 
-with tab_detect:
-    render_detect_tab()
+tab_detect_round1, tab_detect_round2, tab_gallery, tab_round1, tab_round2 = st.tabs([
+    "🔍 Detection roun1"," 🔍 Detection roun2", "🖼️ Gallery", "📊 Round 1", "🔮 Round 2"
+])
 
-with tab_guide:
-    st.header("Detection Guide")
-    with open("guide/detection-guide.md", "r") as f:
-        guide_text = f.read()
-        st.markdown(guide_text)
+with tab_detect_round1:
+    render_detect_round1_tab()
+
+with tab_detect_round2:
+    st.header("🔮 Round 2 — Coming Soon")
+    st.markdown("Round 2 will include: YOLO model, Guide v2, expert labels, and real healthy training data.")
 
 with tab_gallery:
     render_gallery_tab()
+
+with tab_round1:
+    render_round1_tab()
+
+with tab_round2:
+    st.header("🔮 Round 2 — Coming Soon")
+    st.markdown("Round 2 will include: YOLO model, Guide v2, expert labels, and real healthy training data.")

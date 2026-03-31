@@ -1,0 +1,11 @@
+Metric,Value
+Total patches,"5,147"
+Agreement count,"3,980"
+Agreement rate,77.3%
+Cohen's Kappa,0.490 (Moderate)
+ML total Sick,"2,123 (41.2%)"
+Combo total Sick,956 (18.6%)
+Both say Healthy,"3,024 (58.8%)"
+Both say Sick,956 (18.6%)
+"ML Sick, Combo Healthy","1,167 (22.7%)"
+"ML Healthy, Combo Sick",0 (0.0%)

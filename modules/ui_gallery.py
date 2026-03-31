@@ -137,7 +137,7 @@ def render_gallery_tab():
             with img_cols[i]:
                 try:
                     img = Image.open(img_info["file"])
-                    st.image(img, caption=img_info["caption"], use_column_width=True)
+                    st.image(img, caption=img_info["caption"], use_container_width=True)
                 except FileNotFoundError:
                     st.warning(f"Image not found: {img_info['file']}")
 

@@ -5,7 +5,7 @@ from modules.detection import run_detection
 import csv
 import io
 
-def render_detect_tab():
+def render_detect_round1_tab():
     """Render the detection tab UI."""
     # ---- Sidebar ----
     st.sidebar.header("Detection Method")
@@ -29,7 +29,7 @@ def render_detect_tab():
         # Show uploaded image
         col_img, col_empty = st.columns([1, 1])
         with col_img:
-            st.image(image, caption=f"Uploaded: {w} × {h} pixels", use_column_width=True)
+            st.image(image, caption=f"Uploaded: {w} × {h} pixels", use_container_width=True)
 
         # Patch size depends on method
         patch_w, patch_h = 224, 224
@@ -79,7 +79,7 @@ def render_detect_tab():
                 idx = start + i
                 if idx < total:
                     with col:
-                        st.image(patches[idx]["image"], use_column_width=True)
+                        st.image(patches[idx]["image"], use_container_width=True)
                         st.caption(f"#{idx + 1} ({patches[idx]['col']},{patches[idx]['row']})")
 
             # Detect button
@@ -143,7 +143,7 @@ def render_detect_tab():
                     if fidx < total_filtered:
                         idx, r = filtered[fidx]
                         with col:
-                            st.image(patches[idx]["image"], use_column_width=True)
+                            st.image(patches[idx]["image"], use_container_width=True)
                             if mode == "model":
                                 color = "#f85149" if r["label"] == "Sick" else "#3fb950"
                                 st.markdown(f'<span style="color:{color}; font-weight:bold;">{r["label"]} ({r["confidence"]:.0%})</span>', unsafe_allow_html=True)

@@ -4,3 +4,7 @@ full drawn images/
 משימות.txt
 __pycache__/
 *.pyc
+node_modules
+.venv/
+package-lock.json
+package.json
