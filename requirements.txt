@@ -2,3 +2,4 @@ streamlit
 tensorflow
 google-generativeai
 Pillow
+ultralytics>=8.3.0

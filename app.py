@@ -12,6 +12,7 @@ st.set_page_config(
 )
 
 from modules.ui_detect import render_detect_round1_tab
+from modules.ui_round2_detect import render_detect_round2_tab
 from modules.ui_gallery import render_gallery_tab
 from modules.ui_round1 import render_round1_tab
 
@@ -29,23 +30,31 @@ st.markdown("Upload a drone photo → slice into patches → detect disease")
 
 # ---- Tabs ----
 
-tab_detect_round1, tab_detect_round2, tab_gallery, tab_round1, tab_round2 = st.tabs([
-    "🔍 Detection roun1"," 🔍 Detection roun2", "🖼️ Gallery", "📊 Round 1", "🔮 Round 2"
-])
+# ---- Sidebar navigation ----
+page = st.sidebar.radio(
+    "📋 Pages",
+    [
+        "🔍 Round 1 Detection",
+        "🔍 Round 2 Detection",
+        "🖼️ Gallery",
+        "📊 Round 1 Report",
+        "🔮 Round 2 Report",
+    ],
+)
+st.sidebar.markdown("---")
 
-with tab_detect_round1:
-    render_detect_round1_tab()
+# ---- Route to page ----
+if page == "🔍 Round 1 Detection":
+    render_detect_round1_tab()        # writes its own sidebar widgets below navigation
 
-with tab_detect_round2:
-    st.header("🔮 Round 2 — Coming Soon")
-    st.markdown("Round 2 will include: YOLO model, Guide v2, expert labels, and real healthy training data.")
+elif page == "🔍 Round 2 Detection":
+    render_detect_round2_tab()
 
-with tab_gallery:
+elif page == "🖼️ Gallery":
     render_gallery_tab()
 
-with tab_round1:
+elif page == "📊 Round 1 Report":
     render_round1_tab()
 
-with tab_round2:
+elif page == "🔮 Round 2 Report":
     st.header("🔮 Round 2 — Coming Soon")
-    st.markdown("Round 2 will include: YOLO model, Guide v2, expert labels, and real healthy training data.")
