@@ -32,3 +32,34 @@ def predict_patches(patches):
 
     progress.empty() 
     return results 
+
+def load_model(path):
+    mod = tf.keras.models.load_model(path)
+    mod.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001), loss='binary_crossentropy', metrics=['accuracy'])
+    return mod
+
+def predict_patches_load_model(path, patches, patch_size):
+    model2 = load_model(path)
+    """Run ML model on all patches and return results."""
+    results = []
+    progress = st.progress(0)
+
+    for i, p in enumerate(patches):
+        img_array = np.array(p["image"].convert("RGB").resize(patch_size)) /255 
+        img_array = np.expand_dims(img_array, axis=0)
+        img_array = tf.convert_to_tensor(img_array)
+        pred = model2.predict(img_array, verbose=0)[0][0]
+        label = "Sick" if pred >= 0.5 else "Healthy"
+        confidence = pred if pred >= 0.5 else 1 - pred
+
+        results.append({
+            "col": p["col"], "row": p["row"],
+            "x": p["x"], "y": p["y"], 
+            "label": label, "confidence": float(confidence),
+        })
+
+        progress.progress((i + 1) / len(patches))
+
+    progress.empty() 
+    return results 
+    

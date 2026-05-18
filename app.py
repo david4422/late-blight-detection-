@@ -2,6 +2,7 @@
 Late Blight Detection App
 Run with: streamlit run app.py
 """
+from modules.ml_classifiction_detect_round2 import render_detect_round2_ml_tab
 import streamlit as st
 
 # ---- Page Config (must be first Streamlit command) ----
@@ -36,6 +37,7 @@ page = st.sidebar.radio(
     [
         "🔍 Round 1 Detection",
         "🔍 Round 2 Detection",
+        "Round 2 - ML Classification",
         "🖼️ Gallery",
         "📊 Round 1 Report",
         "🔮 Round 2 Report",
@@ -49,6 +51,9 @@ if page == "🔍 Round 1 Detection":
 
 elif page == "🔍 Round 2 Detection":
     render_detect_round2_tab()
+    
+elif page == "Round 2 - ML Classification":
+    render_detect_round2_ml_tab()
 
 elif page == "🖼️ Gallery":
     render_gallery_tab()
