@@ -2,7 +2,7 @@
 Late Blight Detection App
 Run with: streamlit run app.py
 """
-from modules.ml_classifiction_detect_round2 import render_detect_round2_ml_tab
+
 import streamlit as st
 
 # ---- Page Config (must be first Streamlit command) ----
@@ -12,6 +12,7 @@ st.set_page_config(
     layout="wide",
 )
 
+from modules.ml_classifiction_detect_round2 import render_detect_round2_ml_tab
 from modules.ui_detect import render_detect_round1_tab
 from modules.ui_round2_detect import render_detect_round2_tab
 from modules.ui_gallery import render_gallery_tab
